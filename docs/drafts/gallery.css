@@ -1,0 +1,16 @@
+.photo-container .col-lg-4 {
+  padding: .5%;
+}
+
+.row {
+  padding: 4px;
+  margin-bottom: 2rem;
+}
+
+figure {
+  margin: 0;
+}
+
+figcaption {
+  display: none;
+}

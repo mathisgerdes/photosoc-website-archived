@@ -1,0 +1,286 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- PhotoSwipe CSS -->
+    <link rel="stylesheet" href="../photoswipe/photoswipe.css">
+    <link rel="stylesheet" href="../photoswipe/default-skin/default-skin.css">
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="gallery.css">
+
+    <title>PhotoSoc Edinburgh - Gallery (Autumn Exhibition 2016)</title>
+  </head>
+
+  <body>
+
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="main.html">
+          <img src="https://cdn3.iconfinder.com/data/icons/glypho-photography/64/camera-shutter-512.png" width="30" height="30" class="d-inline-block align-top" alt="" style="filter:invert(1);">
+          PhotoSoc Edinburgh
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Galleries</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Members</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main role="main">
+
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">PhotoSoc Autumn Exhibition</h1>
+          <p class="lead text-muted">Pictures from the 2017 Photosoc Autum Exhibition.</p>
+        </div>
+      </section>
+
+      <div class="container photo-container" itemscope itemtype="http://schema.org/ImageGallery">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="ratio-box-4by3">
+              <figure class="ratio-box-child" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                <a href="https://placekitten.com/700/400" item-prop="contentUrl" data-size="700x400">
+                  <img class="ratio-box-img" src="https://placekitten.com/700/400" itemprop="thumbnail" alt="">
+                </a>
+                <figcaption>Three cats in a basket - <a href="#">Mr. Meow</a></figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="ratio-box-4by3">
+              <figure class="ratio-box-child" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                <a href="https://placekitten.com/700/400" item-prop="contentUrl" data-size="700x400">
+                  <img class="ratio-box-img" src="https://placekitten.com/700/400" itemprop="thumbnail" alt="">
+                </a>
+              </figure>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="ratio-box-4by3">
+              <figure class="ratio-box-child" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                <a href="https://placekitten.com/700/400" item-prop="contentUrl" data-size="700x400">
+                  <img class="ratio-box-img" src="https://placekitten.com/700/400" itemprop="thumbnail" alt="">
+                </a>
+              </figure>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="ratio-box-4by3">
+              <figure class="ratio-box-child" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                <a href="https://placekitten.com/1200/900" item-prop="contentUrl" data-size="1200x900">
+                  <img class="ratio-box-img" src="https://placekitten.com/1200/900" itemprop="thumbnail" alt="">
+                </a>
+              </figure>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="ratio-box-4by3">
+              <figure class="ratio-box-child" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                <a href="https://placekitten.com/250/200" item-prop="contentUrl" data-size="250x200">
+                  <img class="ratio-box-img" src="https://placekitten.com/250/200" itemprop="thumbnail" alt="">
+                </a>
+              </figure>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- See http://photoswipe.com/documentation/getting-started.html -->
+      <!-- Root element of PhotoSwipe -->
+      <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+        <!-- Background of PhotoSwipe.
+        It's a separate element as animating opacity is faster than rgba(). -->
+        <div class="pswp__bg"></div>
+
+        <!-- Slides wrapper with overflow:hidden. -->
+        <div class="pswp__scroll-wrap">
+
+          <!-- Container that holds slides.
+          PhotoSwipe keeps only 3 of them in the DOM to save memory.
+          Don't modify these 3 pswp__item elements, data is added later on. -->
+          <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+          </div>
+
+          <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+          <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+
+              <!--  Controls are self-explanatory. Order can be changed. -->
+              <div class="pswp__counter"></div>
+              <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+              <button class="pswp__button pswp__button--share" title="Share"></button>
+              <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+              <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+              <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+              <!-- element will get class pswp__preloader - active when preloader is running -->
+              <div class="pswp__preloader">
+                <div class="pswp__preloader__icn">
+                  <div class="pswp__preloader__cut">
+                    <div class="pswp__preloader__donut"></div>
+                  </div>
+                </div>
+              </div>
+
+            </div> <!-- /.pswp__top-bar -->
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+              <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+            <div class="pswp__caption">
+              <div class="pswp__caption__center"></div>
+            </div>
+
+          </div> <!-- ./pswp__ui -->
+        </div> <!-- ./pswp__scroll-wrap -->
+      </div> <!-- ./pswp -->
+
+      <!-- FOOTER -->
+      <footer class="container">
+        <p class="float-right"><a href="#">Back to top</a></p>
+        <p>© Edinburgh University Photography Society · <a href="#">Contact</a> · <a href="#">About</a></p>
+      </footer>
+    </main>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- PhotoSwipe -->
+    <script src="../photoswipe/photoswipe.min.js" charset="utf-8"></script>
+    <script src="../photoswipe/photoswipe-ui-default.min.js" charset="utf-8"></script>
+
+    <script type="text/javascript">
+      $( document ).ready(function() {
+        var getItems = function() {
+          var items = [];
+          $(".photo-container").find('figure').each(function() {
+            var href   = $(this).children("a").attr('href'),
+                size   = $(this).children("a").data('size').split('x'),
+                width  = size[0],
+                height = size[1];
+
+            var item = {
+                src : href,
+                w   : width,
+                h   : height
+            }
+
+            // <figcaption> content
+            if($(this).find("figcaption").length) {
+              item.title = $(this).find("figcaption")[0].innerHTML;
+              console.log("found!" + item.title)
+            }
+
+            // thumbnail url
+            item.msrc = $(this).find("img")[0].getAttribute("src");
+
+            item.el = $(this)[0]; // save link to figure element for getThumbBoundsFn
+            items.push(item);
+          });
+          return items;
+        };
+
+        items = getItems();
+        pswp = $('.pswp')[0];
+
+        var photoswipeParseHash = function() {
+          var hash = window.location.hash.substring(1),
+          params = {};
+
+          if(hash.length < 5) {
+            return params;
+          }
+
+          var vars = hash.split('&');
+          for (var i = 0; i < vars.length; i++) {
+            if(!vars[i]) {
+              continue;
+            }
+            var pair = vars[i].split('=');
+            if(pair.length < 2) {
+              continue;
+            }
+            params[pair[0]] = pair[1];
+          }
+
+          if(params.gid) {
+            params.gid = parseInt(params.gid, 10);
+          }
+
+          return params;
+        };
+
+        var openPhotoSwipe = function(index, disableAnimation) {
+          var options = {
+            index: index,
+            bgOpacity: 0.7,
+            showHideOpacity: true,
+
+            galleryUID: 1, // only 1 gallery per page
+
+            getThumbBoundsFn: function(index) {
+              // See Options -> getThumbBoundsFn section of documentation for more info
+              var thumbnail = items[index].el.getElementsByTagName('img')[0], // find thumbnail
+                pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
+                rect = thumbnail.getBoundingClientRect();
+
+              return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
+            }
+          }
+          if(disableAnimation) {
+            options.showAnimationDuration = 0;
+          }
+
+          var gallery = new PhotoSwipe(pswp, PhotoSwipeUI_Default, items, options)
+          gallery.init();
+        };
+
+        $(".photo-container").on('click', 'figure', function(event) {
+          event.preventDefault();
+          var index = $("figure").index(this);
+          console.log("clicked: " + index);
+          openPhotoSwipe(index, false);
+        });
+
+        // open picture of url hash contains &pid=...&gid=...
+        var hashData = photoswipeParseHash();
+        if(hashData.pid && hashData.gid) {
+          openPhotoSwipe(hashData.pid - 1, true);
+        }
+      });
+    </script>
+  </body>
+</html>
