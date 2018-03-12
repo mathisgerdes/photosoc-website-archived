@@ -1,0 +1,23 @@
+{
+  "slides": [
+    {
+      "image": "https://static.pexels.com/photos/368893/pexels-photo-368893.jpeg",
+      "heading": "Love Photography?",
+      "text": "We are a group of students of the University of Edinburgh, passionate to explore the world of photography. Join us for frequent events and trips!",
+      "button": "Visit us on Facebook",
+      "button_link": "https://www.facebook.com/pg/PhotoSoc.ED/"
+    },
+    {
+      "image": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Loch_Torridon%2C_Scotland.jpg",
+      "heading": "Explore the Highlands.",
+      "text": "Discover beautiful scenes of the Scottish Highlands, from one of our recent trips to the Isle of Skye!"
+    },
+    {
+      "image": "https://upload.wikimedia.org/wikipedia/commons/d/d7/McEwan_Hall_refurbished_interior_dome.jpg",
+      "heading": "See the World with Different Eyes!",
+      "text": "No matter whether you are a novice or an expert, our society is open to all new members. Join us to one of our regular meet-ups!",
+      "button": "Learn more",
+      "button_link": "#"
+    }
+  ]
+}
