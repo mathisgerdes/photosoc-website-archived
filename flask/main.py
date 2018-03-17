@@ -21,7 +21,7 @@ def debug_root():
     try:
         return render_template('index.html',
                                home=store['sites/home.json'],
-                               events=store['sites/events.json'])
+                               events=store['events/events.json'])
     except Exception as e:
         return str(e)
 
