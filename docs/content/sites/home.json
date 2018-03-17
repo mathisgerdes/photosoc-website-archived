@@ -20,6 +20,7 @@
       "button_link": "#"
     }
   ],
+  "featured_events": [0, 1, 2],
   "features" : [
     {
       "image": "https://scontent-lht6-1.xx.fbcdn.net/v/t1.0-9/22221570_1533616703387547_3168923431255143687_n.jpg?oh=e8e81f632d8a6e680865d9a87c75082f&oe=5B035B77",
