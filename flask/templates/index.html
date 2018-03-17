@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% block additional_css %}
+<link rel="stylesheet" href="https://mathisgerdes.github.io/photosoc-edinburgh/css/index.css">
+{% endblock %}
+
+{% block main %}
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    {% for slide in home.slides %}
+    <div class="carousel-item {% if loop.first %}active{% endif %}">
+      <img class="d-block w-100" src="{{ slide.image }}" alt="First slide">
+      <div class="container">
+        <div class="carousel-caption text-right">
+          <h1>{{ slide.heading }}</h1>
+          <p> {{ slide.text }} </p>
+          {% if slide.button -%}
+          <p><a class="btn btn-lg btn-primary" href="{{ slide.button_link }}" role="button">{{ slide.button }}</a></p>
+          {%- endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+<div class="container-fluid">
+  <div class="jumbotron">
+    <h1> Upcoming Events </h1>
+    <p class="lead"> A selection of upcoming events. You can find a list of all upcoming and past events <a href="#">here</a>, and don't miss our <a href="#"> regular meet-ups</a>!</p>
+    <hr class="my-4">
+    <div class="row">
+      <div class="col">
+        <div class="card event">
+          <div class="ratio-box-4by3">
+            <div class="ratio-box-child">
+              <img class="card-img-top ratio-box-img" src="https://scontent-lht6-1.xx.fbcdn.net/v/t1.0-9/27858036_1658579427557940_5629662730723294175_n.jpg?oh=5c8cc337c486c0859d772427ef107f74&oe=5B0AE544" alt="Card image cap">
+            </div>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="event-date">04 Mar 2018, 19:00 - 22:00</p>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card event">
+          <div class="ratio-box-4by3">
+            <div class="ratio-box-child">
+              <img class="card-img-top ratio-box-img" src="https://scontent-lht6-1.xx.fbcdn.net/v/t1.0-9/27072599_1644361348979748_1374532401829564779_n.jpg?oh=0fc6c7a0e213546eac7faf9607cb5f92&oe=5B0A431B" alt="Card image cap">
+            </div>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Semester Trip 2: Isle of Mull</h5>
+            <p class="event-date">07 Jun 2018 - 09 Jun 2018</p>
+            <p class="card-text">
+              From the rugged ridges of Ben More and the black basalt crags of Burg to the blinding white sand, rose-pink granite and emerald waters that fringe the Ross, Mull can lay claim to some of the finest and most varied scenery in the Inner Hebrides. Noble birds of prey soar over mountain and coast, while the western waters provide good whale-watching. Add a lovely waterfront 'capital', an impressive castle, the sacred island of Iona and easy access from Oban.
+            </p>
+            <a href="#" class="btn btn-primary">Go to Event</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card event">
+          <div class="ratio-box-4by3">
+            <div class="ratio-box-child">
+              <img class="card-img-top ratio-box-img" src="https://scontent-lht6-1.xx.fbcdn.net/v/t1.0-9/27066863_1645826428833240_3515270817954728365_n.jpg?oh=1e85efe5976ad56776e887a52aaceb0d&oe=5B07740A" alt="Card image cap">
+            </div>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="event-date">07 Jun 2018 - 09 Jun 2018</p>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Highlights and featurettes
+================================================== -->
+<!-- Wrap the rest of the page in another container to center all the content. -->
+
+<div class="container highlights">
+
+  <!-- START THE FEATURETTES -->
+  <hr class="featurette-divider">
+
+  <div class="row featurette">
+    <div class="featurette-text col-md-7">
+      <h2 class="featurette-heading">Lake District. <span class="text-muted">PhotoSoc Semester Trip 2017.</span></h2>
+      <p class="lead">
+        Photosoc had its semesterly overnight trip 2017 to the breathtaking landscape of Lake District, the birthplace of poet Wordsworth and many inspiring photography spots. Possibly the most photographed place in the UK, this time we explored the iconic tree ‘sentinels’ of Lake Buttermere and had a chance of star gazing photography.
+      </p>
+      <a class="btn btn-primary" href="#">View Gallery »</a>
+    </div>
+    <div class="col-md-5">
+      <img class="featurette-image img-fluid mx-auto" alt="500x500" style="width: 500px; height: 500px;" src="https://scontent-lht6-1.xx.fbcdn.net/v/t1.0-9/22221570_1533616703387547_3168923431255143687_n.jpg?oh=e8e81f632d8a6e680865d9a87c75082f&oe=5B035B77">
+    </div>
+  </div>
+
+  <hr class="featurette-divider">
+
+  <div class="row featurette">
+    <div class="featurette-text col-md-7 order-md-2">
+      <h2 class="featurette-heading">Haribo bears! <span class="text-muted">Macro shots and more from this photoshoot. </span></h2>
+      <p class="lead">
+        A macro shot from last year's macro photography workshop by an unknown photosocer in James Killick's group.
+      </p>
+      <a class="btn btn-primary" href="#">View Gallery »</a>
+    </div>
+    <div class="col-md-5 order-md-1">
+      <img class="featurette-image img-fluid mx-auto" alt="500x500" style="width: 500px; height: 500px;" src="https://scontent-lht6-1.xx.fbcdn.net/v/t31.0-8/665453_374283729320856_1796256379_o.jpg?oh=fda3c05454553e60591ddfa35d691fa9&oe=5B06E543">
+    </div>
+  </div>
+
+  <hr class="featurette-divider">
+
+  <div class="row featurette">
+    <div class="featurette-text col-md-7">
+      <h2 class="featurette-heading">Portrait photo shoot. <span class="text-muted"></span></h2>
+      <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+    </div>
+    <div class="col-md-5">
+      <img class="featurette-image img-fluid mx-auto" alt="500x500" style="width: 500px; height: 500px;" src="https://scontent-lht6-1.xx.fbcdn.net/v/t1.0-9/307993_373181162764446_375160150_n.jpg?oh=bb68f90ae8e1f36deb20fbfee2dfbf5b&oe=5B11F49B">
+    </div>
+  </div>
+
+  <hr class="featurette-divider">
+
+  <!-- /END THE FEATURETTES -->
+
+
+</div> <!-- /.container -->
+{% endblock %}
