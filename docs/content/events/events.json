@@ -1,0 +1,28 @@
+[
+  {
+    "title": "Semester Trip 2: The Isle of Mull",
+    "picture": "https://scontent-lht6-1.xx.fbcdn.net/v/t1.0-9/27072599_1644361348979748_1374532401829564779_n.jpg?oh=0fc6c7a0e213546eac7faf9607cb5f92&oe=5B0A431B",
+    "date": ["2018-03-23", "2018-03-25"],
+    "summary": "From the rugged ridges of Ben More and the black basalt crags of Burg to the blinding white sand, rose-pink granite and emerald waters that fringe the Ross, Mull can lay claim to some of the finest and most varied scenery in the Inner Hebrides. Noble birds of prey soar over mountain and coast, while the western waters provide good whale-watching. Add a lovely waterfront 'capital', an impressive castle, the sacred island of Iona and easy access from Oban.",
+    "details": "2018_semester_trip_2.md",
+    "fb_link": "https://www.facebook.com/events/163122277647449/"
+  },
+  {
+    "title": "Introduction to Film Cameras",
+    "picture": "https://scontent-lht6-1.xx.fbcdn.net/v/t1.0-9/27858036_1658579427557940_5629662730723294175_n.jpg?oh=5c8cc337c486c0859d772427ef107f74&oe=5B0AE544",
+    "date": ["2018-03-23"],
+    "time": ["19:30", "20:30"],
+    "summary": "So you decide that you want to give shooting film a try, but where do you start? Well, first you need a camera. You jump on the interwebs and quickly realize that there are about a billion film cameras out there and they’re all different! Have no fear. I will be your guide into the dense thicket that is the wonderful world of film cameras.",
+    "details": "2018_film_cameras.md",
+    "fb_link": "https://www.facebook.com/events/627508784246773/"
+  },
+  {
+    "title": "Photo Critique Session",
+    "picture": "https://scontent-lht6-1.xx.fbcdn.net/v/t1.0-9/27066863_1645826428833240_3515270817954728365_n.jpg?oh=1e85efe5976ad56776e887a52aaceb0d&oe=5B07740A",
+    "date": ["2018-02-08"],
+    "time": ["19:30", "20:30"],
+    "summary": "Photosoc are encouraging you to send in your images to participate in a photo critique session! All images will be printed as 6x4 inch prints, and available for you to collect on the night. Come along to see some of the great work from our members, and get feedback on your own work!",
+    "details": "2018_photo_critique.md",
+    "fb_link": "https://www.facebook.com/events/1989214081402774/"
+  }
+]
