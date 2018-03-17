@@ -37,59 +37,25 @@
 </div>
 
 <div class="container-fluid">
-  <div class="jumbotron">
-    <h1> Upcoming Events </h1>
-    <p class="lead"> A selection of upcoming events. You can find a list of all upcoming and past events <a href="#">here</a>, and don't miss our <a href="#"> regular meet-ups</a>!</p>
-    <hr class="my-4">
-    <div class="row">
-      <div class="col">
-        <div class="card event">
-          <div class="ratio-box-4by3">
-            <div class="ratio-box-child">
-              <img class="card-img-top ratio-box-img" src="https://scontent-lht6-1.xx.fbcdn.net/v/t1.0-9/27858036_1658579427557940_5629662730723294175_n.jpg?oh=5c8cc337c486c0859d772427ef107f74&oe=5B0AE544" alt="Card image cap">
-            </div>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="event-date">04 Mar 2018, 19:00 - 22:00</p>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+  <h1 class="display-4 text-center">Upcoming</h1>
+  <div class="row">
+    {% for eventid in home.featured_events %}
+    <div class="col-lg">
+      <div class="card event">
+        <div class="ratio-box-16by9">
+          <div class="ratio-box-child">
+            <img class="card-img-top ratio-box-img" src="{{ events[eventid].image }}" alt="Event Preview Image">
           </div>
         </div>
-      </div>
-      <div class="col">
-        <div class="card event">
-          <div class="ratio-box-4by3">
-            <div class="ratio-box-child">
-              <img class="card-img-top ratio-box-img" src="https://scontent-lht6-1.xx.fbcdn.net/v/t1.0-9/27072599_1644361348979748_1374532401829564779_n.jpg?oh=0fc6c7a0e213546eac7faf9607cb5f92&oe=5B0A431B" alt="Card image cap">
-            </div>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">Semester Trip 2: Isle of Mull</h5>
-            <p class="event-date">07 Jun 2018 - 09 Jun 2018</p>
-            <p class="card-text">
-              From the rugged ridges of Ben More and the black basalt crags of Burg to the blinding white sand, rose-pink granite and emerald waters that fringe the Ross, Mull can lay claim to some of the finest and most varied scenery in the Inner Hebrides. Noble birds of prey soar over mountain and coast, while the western waters provide good whale-watching. Add a lovely waterfront 'capital', an impressive castle, the sacred island of Iona and easy access from Oban.
-            </p>
-            <a href="#" class="btn btn-primary">Go to Event</a>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card event">
-          <div class="ratio-box-4by3">
-            <div class="ratio-box-child">
-              <img class="card-img-top ratio-box-img" src="https://scontent-lht6-1.xx.fbcdn.net/v/t1.0-9/27066863_1645826428833240_3515270817954728365_n.jpg?oh=1e85efe5976ad56776e887a52aaceb0d&oe=5B07740A" alt="Card image cap">
-            </div>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="event-date">07 Jun 2018 - 09 Jun 2018</p>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ events[eventid].title }}</h5>
+          <p class="event-date">{{ events[eventid].date }}</p>
+          <p class="card-text">{{ events[eventid].summary }}</p>
+          <a href="{{ events[eventid].fb_link }}" class="btn btn-primary">Facebook</a>
         </div>
       </div>
     </div>
+    {% endfor %}
   </div>
 </div>
 
