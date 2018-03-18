@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="https://mathisgerdes.github.io/photosoc-edinburgh/css/index.css">
 {% endblock %}
 
-{% block main %}
+{% block header %}
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -12,8 +12,7 @@
   </ol>
   <div class="carousel-inner">
     {% for slide in home.slides %}
-    <div class="carousel-item {% if loop.first %}active{% endif %}">
-      <img class="d-block w-100" src="{{ slide.image }}" alt="First slide">
+    <div class="carousel-item {% if loop.first %}active{% endif %}" style="background-image:url({{ slide.image }});">
       <div class="container">
         <div class="carousel-caption text-right">
           <h1>{{ slide.heading }}</h1>
@@ -35,7 +34,9 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+{% endblock %}
 
+{% block main %}
 <div class="container-fluid">
   <h1 class="display-4 text-center">Upcoming</h1>
   <div class="row">
