@@ -1,5 +1,7 @@
 /flask/env
 /flask/lib
+# contains API keys
+/flask/config.py
 
 # python
 *.pyc
