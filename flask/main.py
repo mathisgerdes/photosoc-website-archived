@@ -3,33 +3,56 @@ from werkzeug.contrib.cache import GAEMemcachedCache
 from flask import Flask, render_template, request
 from content import ContentStore
 
-import logging
+import json
 
 app = Flask(__name__)
 
 # SETTINGS
-CONTENT_URL = 'https://mathisgerdes.github.io/photosoc-edinburgh/content/'
-app.config.from_object(__name__)
+app.config.from_object('config')
+# CONSTANTS
+SHEETS_URL = 'https://sheets.googleapis.com/v4/'
 
 cache = GAEMemcachedCache()
-store = ContentStore(cache, urlfetch.fetch, app.config['CONTENT_URL'])
+store = ContentStore(cache, urlfetch.fetch,
+                     app.config['GOOGLE_KEY'],
+                     app.config['CONTENT_PATHS'])
 
 # ROUTES
+
+@app.route('/flickr')
+def flickr_test():
+    try:
+        url = "https://api.flickr.com/services"
+        response = urlfetch.fetch(app.config['FLICKR_API_URL']+'method=flickr.test.echo&name=value')
+        if response.status_code != 200:
+            return "Error, http error"
+        answer = json.loads(response.content)
+        if answer['stat'] != 'ok':
+            return "Error, answer fail"
+        return json.dumps(answer)
+    except Exception as e:
+        return  str(e)
 
 @app.route('/')
 def debug_root():
     try:
         return render_template('index.html',
-                               home=store['sites/home.json'],
-                               events=store['events/events.json'])
+                               home=store['home'],
+                               events=store['events'])
     except Exception as e:
         return str(e)
 
 @app.route('/admin/content')
 def show_content():
-    return str(store)
+    try:
+        return '<!doctype html><html><body>' + str(store) + '</body></html>'
+    except Exception as e:
+        return str(e)
 
 @app.route('/admin/update')
 def update_data():
-    store.update_all()
-    return str(store)
+    try:
+        store.update_all()
+    except Exception as e:
+        return str(e)
+    return show_content()
