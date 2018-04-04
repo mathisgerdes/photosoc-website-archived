@@ -15,7 +15,8 @@ SHEETS_URL = 'https://sheets.googleapis.com/v4/'
 cache = GAEMemcachedCache()
 store = ContentStore(cache, urlfetch.fetch,
                      app.config['GOOGLE_KEY'],
-                     app.config['CONTENT_PATHS'])
+                     app.config['CONTENT_PATHS'],
+                     app.config['TIMEOUT'])
 
 # ROUTES
 

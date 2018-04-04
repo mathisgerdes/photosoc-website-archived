@@ -1,6 +1,5 @@
 import json
-
-TIMEOUT = 60*60*24  # time in seconds; 24h
+from cache import CacheInterface
 
 
 def parse_time(date_from, date_to, time_from, time_to):
@@ -18,85 +17,12 @@ def opt_row_item(row, index, default):
     except IndexError:
         return default
 
-class CacheInterface(object):
-    def __init__(self, cache, urlfetch, base_url='', content=dict(),
-                 default_parse=None):
-        self.cache = cache
-        self.urlfetch = urlfetch
-        self.base_url = base_url
-        self.content = content
-        self.default_parse = default_parse
-
-    def fetch(self, path):
-        response = self.urlfetch(self.base_url + path)
-        if response.status_code != 200:
-            value = None
-        else:
-            value = response.content
-        return value
-
-    def update(self, key):
-        """ Force update of the value saved in cache for key.
-
-        If key is not in self.content, key is expected to be a url
-        (i.e. base_url + key is expected to be a valid url).
-
-        Returns:
-            Updated, parsed value of key.
-        """
-        try:
-            # try update with known parse function and path
-            path, update_fn = self.content[key]
-            value = update_fn(path)
-        except KeyError:
-            # default update mechanism
-            value = self.fetch(key)
-            if self.default_parse is not None:
-                value = self.default_parse(value)
-
-        self.cache.set(key, value, timeout=TIMEOUT)
-
-        return value
-
-    def update_all(self, keys=None):
-        """ Update all file names in content.
-
-        Args:
-            content: iterable giving the resource keys.
-                By default update all entries in self.content.
-        """
-        if keys is None:
-            keys = self.content
-        values = []
-        for key in keys:
-            values.append(self.update(key))
-        return values
-
-    def _pretty_print(self, key):
-        """ Returns a pretty printed string of the value to key. """
-        text = json.dumps(self.cache.get(key), indent=2)
-        return text.replace('\n', '<br>').replace(' ', '&nbsp;')
-
-    def __getitem__(self, key):
-        """ Get entry; fetch & update the value if it is not in the cache. """
-        value = self.cache.get(key)
-        if value is None:
-            value = self.update(key)
-        return value
-
-    def __str__(self):
-        values = ['<h3>' + key + '</h3><p>' +
-                  self._pretty_print(key) + '</p>'
-                  for key in self.content]
-        return ('<h2> Cached Values </h2>' +
-                '\n'.join(values))
 
 class SpreadsheetsInterface(CacheInterface):
-    def __init__(self, google_key, cache, urlfetch, content=dict(),
-                 default_parse=None):
+    def __init__(self, google_key, *args, **kwargs):
         self.google_key = google_key
-        CacheInterface.__init__(self, cache, urlfetch,
-            'https://sheets.googleapis.com/v4/', content, default_parse)
+        CacheInterface.__init__(
+            self, 'https://sheets.googleapis.com/v4/', *args, **kwargs)
 
     def fetch_section(self, path, section):
         """ Fetch a section of a spreadsheet.
@@ -122,10 +48,11 @@ class SpreadsheetsInterface(CacheInterface):
 
 
 class ContentStore(SpreadsheetsInterface):
-    def __init__(self, cache, urlfetch, google_key, paths):
+    def __init__(self, cache, urlfetch, google_key, paths, timeout):
         SpreadsheetsInterface.__init__(self, google_key, cache, urlfetch, {
-            'events': (paths['events'], self.update_events),
-            'home': (paths['home'], self.update_home)})
+                'events': (paths['events'], self.update_events),
+                'home': (paths['home'], self.update_home)},
+            timeout)
 
     def update_events(self, path):
         events = []
