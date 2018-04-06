@@ -71,7 +71,7 @@ class ContentStore(SpreadsheetsInterface):
                 'title': row[0],
                 'text': row[5],
                 'date': parse_time(row[1], row[2], row[3], row[4]),
-                'image': self.parse_image(row[6], '_h.jpg'),
+                'image': self.parse_image(row[6], '_b.jpg'),
                 'link': row[7],
                 'full_text': row[8]})
 
@@ -99,7 +99,7 @@ class ContentStore(SpreadsheetsInterface):
         features = []
         for row in self.fetch_list(path + 'Featurettes', 'B', 'G', 2):
             features.append({
-                'image': self.parse_image(row[0], '_h.jpg'),
+                'image': self.parse_image(row[0], '_b.jpg'),
                 'heading': row[1],
                 'heading_muted': row[2],
                 'text': row[3],
