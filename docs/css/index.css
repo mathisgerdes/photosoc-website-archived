@@ -13,6 +13,10 @@
 
 /* Declare heights because of positioning of img element */
 .carousel-item {
+  padding-bottom: 1rem;
+}
+
+.carousel-background {
   height: calc(100.1vh - 3.5rem);
   min-height: 300px;
   background: no-repeat center center scroll;
@@ -20,6 +24,28 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+.carousel-control-next, .carousel-control-prev {
+  bottom: 1rem;
+}
+
+.carousel-indicators {
+  bottom: 1.5rem;
+}
+
+.flickr-link {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 1rem;
+  padding-right: 5px;
+}
+
+.flickr-link a {
+  font-size: small;
+  font-variant: small-caps;
+  color: rgb(90, 90, 90);
 }
 
 /* UPCOMING EVENTS
