@@ -12,7 +12,13 @@
   </ol>
   <div class="carousel-inner">
     {% for slide in home.slides %}
-    <div class="carousel-item {% if loop.first %}active{% endif %}" style="background-image:url({{ slide.image }});">
+    <div class="carousel-item {% if loop.first %}active{% endif %}">
+      <div class="carousel-background" style="background-image:url({{ slide.image[0] }});"></div>
+      {% if slide.image[1] -%}
+      <div class="flickr-link">
+        <a href="{{ slide.image[1] }}">photo on flickr</a>
+      </div>
+      {%- endif %}
       <div class="container">
         <div class="carousel-caption text-right">
           <h1>{{ slide.heading }}</h1>
@@ -44,8 +50,13 @@
     <div class="col-lg">
       <div class="card event">
         <div class="ratio-box-16by9">
+          {% if events[eventid].image[1] -%}
+          <div class="flickr-link" style="bottom:-1rem;">
+            <a href="{{ events[eventid].image[1] }}">photo on flickr</a>
+          </div>
+          {%- endif %}
           <div class="ratio-box-child">
-            <img class="card-img-top ratio-box-img" src="{{ events[eventid].image }}" alt="Event Preview Image">
+            <img class="card-img-top ratio-box-img" src="{{ events[eventid].image[0] }}" alt="Event Preview Image">
           </div>
         </div>
         <div class="card-body">
@@ -81,7 +92,12 @@
       {% endif %}
     </div>
     <div class="col-md-5 {% if loop.index is divisibleby 2 %}order-md-1{% endif %}">
-      <img class="featurette-image img-fluid mx-auto" alt="Feature Photo" style="width: 500px; height: 500px;" src="{{ feature.image }}">
+      {% if feature.image[1] -%}
+      <div class="flickr-link" style="bottom:-1rem;padding-right:15px;">
+        <a href="{{ feature.image[1] }}">photo on flickr</a>
+      </div>
+      {%- endif %}
+      <img class="featurette-image img-fluid mx-auto" alt="Feature Photo" style="width: 500px; height: 500px;" src="{{ feature.image[0] }}">
     </div>
   </div>
 

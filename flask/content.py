@@ -48,11 +48,20 @@ class SpreadsheetsInterface(CacheInterface):
 
 
 class ContentStore(SpreadsheetsInterface):
-    def __init__(self, cache, urlfetch, google_key, paths, timeout):
-        SpreadsheetsInterface.__init__(self, google_key, cache, urlfetch, {
+    def __init__(self, photos, google_key, paths, urlfetch, cache, timeout):
+        self.photos = photos
+
+        SpreadsheetsInterface.__init__(
+            self, google_key, urlfetch, cache, timeout, {
                 'events': (paths['events'], self.update_events),
-                'home': (paths['home'], self.update_home)},
-            timeout)
+                'home': (paths['home'], self.update_home)})
+
+    def parse_image(self, key, flickr_ending):
+        if key.startswith('id:'):
+            id = key.split(':')[1].strip()
+            photo = self.photos.fetch_photo(id)
+            return (photo['src_base'] + flickr_ending, photo['url'])
+        return (key, None)
 
     def update_events(self, path):
         events = []
@@ -62,7 +71,7 @@ class ContentStore(SpreadsheetsInterface):
                 'title': row[0],
                 'text': row[5],
                 'date': parse_time(row[1], row[2], row[3], row[4]),
-                'image': row[6],
+                'image': self.parse_image(row[6], '_h.jpg'),
                 'link': row[7],
                 'full_text': row[8]})
 
@@ -79,7 +88,7 @@ class ContentStore(SpreadsheetsInterface):
         slides = []
         for row in self.fetch_list(path + 'Slides', 'B', 'F', 2):
             slides.append({
-                'image': row[0],
+                'image': self.parse_image(row[0], '_h.jpg'),
                 'heading': row[1],
                 'text': row[2],
                 'button': opt_row_item(row, 3, None),
@@ -90,7 +99,7 @@ class ContentStore(SpreadsheetsInterface):
         features = []
         for row in self.fetch_list(path + 'Featurettes', 'B', 'G', 2):
             features.append({
-                'image': row[0],
+                'image': self.parse_image(row[0], '_h.jpg'),
                 'heading': row[1],
                 'heading_muted': row[2],
                 'text': row[3],

@@ -2,13 +2,13 @@ import json
 
 
 class CacheInterface(object):
-    def __init__(self, base_url, cache, urlfetch, content,
-                 timeout, default_parse=None):
+    def __init__(self, base_url, urlfetch, cache, timeout,
+                 content=None, default_update=None):
         self.cache = cache
         self.urlfetch = urlfetch
         self.base_url = base_url
-        self.content = content
-        self.default_parse = default_parse
+        self.content = content if content is not None else dict()
+        self.default_update = default_update
         self.timeout = timeout
 
     def fetch(self, path):
@@ -22,8 +22,9 @@ class CacheInterface(object):
     def update(self, key):
         """ Force update of the value saved in cache for key.
 
-        If key is not in self.content, key is expected to be a url
-        (i.e. base_url + key is expected to be a valid url).
+        If key is not in self.content, it is passed to default_update.
+        If default_update is None, key must be such
+        that base_url + key is a url.
 
         Returns:
             Updated, parsed value of key.
@@ -34,9 +35,11 @@ class CacheInterface(object):
             value = update_fn(path)
         except KeyError:
             # default update mechanism
-            value = self.fetch(key)
-            if self.default_parse is not None:
-                value = self.default_parse(value)
+            if self.default_update is not None:
+                value = self.default_update(key)
+            else:
+                # otherwise key must be a url
+                value = self.fetch(key)
 
         self.cache.set(key, value, timeout=self.timeout)
 

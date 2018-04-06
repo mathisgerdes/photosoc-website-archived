@@ -2,6 +2,7 @@ from google.appengine.api import urlfetch
 from werkzeug.contrib.cache import GAEMemcachedCache
 from flask import Flask, render_template, request
 from content import ContentStore
+from flickr import FlickrInterface
 
 import json
 
@@ -13,47 +14,43 @@ app.config.from_object('config')
 SHEETS_URL = 'https://sheets.googleapis.com/v4/'
 
 cache = GAEMemcachedCache()
-store = ContentStore(cache, urlfetch.fetch,
-                     app.config['GOOGLE_KEY'],
-                     app.config['CONTENT_PATHS'],
-                     app.config['TIMEOUT'])
+
+photos = FlickrInterface(app.config['FLICKR_KEY'],# app.config['CONTENT_PATHS'],
+                         urlfetch.fetch, cache, app.config['TIMEOUT'])
+content = ContentStore(photos, app.config['GOOGLE_KEY'], app.config['CONTENT_PATHS'],
+                       urlfetch.fetch, cache, app.config['TIMEOUT'])
+
 
 # ROUTES
 
 @app.route('/flickr')
 def flickr_test():
     try:
-        url = "https://api.flickr.com/services"
-        response = urlfetch.fetch(app.config['FLICKR_API_URL']+'method=flickr.test.echo&name=value')
-        if response.status_code != 200:
-            return "Error, http error"
-        answer = json.loads(response.content)
-        if answer['stat'] != 'ok':
-            return "Error, answer fail"
-        return json.dumps(answer)
+        res = photos.fetch_photo('40995662852')
     except Exception as e:
-        return  str(e)
+        return  "Flickr: " + repr(e)
+    return json.dumps(res, indent=2).replace('\n', '<br>').replace(' ', '&nbsp;')
 
 @app.route('/')
 def debug_root():
     try:
         return render_template('index.html',
-                               home=store['home'],
-                               events=store['events'])
+                               home=content['home'],
+                               events=content['events'])
     except Exception as e:
         return str(e)
 
 @app.route('/admin/content')
 def show_content():
     try:
-        return '<!doctype html><html><body>' + str(store) + '</body></html>'
+        return '<!doctype html><html><body>' + str(content) + '</body></html>'
     except Exception as e:
         return str(e)
 
 @app.route('/admin/update')
 def update_data():
     try:
-        store.update_all()
+        content.update_all()
     except Exception as e:
         return str(e)
     return show_content()
