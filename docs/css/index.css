@@ -34,22 +34,6 @@
   bottom: 1.5rem;
 }
 
-.flickr-link {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  height: 1rem;
-  padding-right: 5px;
-}
-
-.flickr-link a {
-  vertical-align: text-bottom;
-  font-size: small;
-  font-size: .8rem;
-  font-variant: small-caps;
-  color: rgb(90, 90, 90);
-}
-
 /* UPCOMING EVENTS
 -------------------------------------------------- */
 .event {
