@@ -17,26 +17,28 @@ cache = GAEMemcachedCache()
 
 photos = FlickrInterface(app.config['FLICKR_KEY'],# app.config['CONTENT_PATHS'],
                          urlfetch.fetch, cache, app.config['TIMEOUT'])
-content = ContentStore(photos, app.config['GOOGLE_KEY'], app.config['CONTENT_PATHS'],
+content = ContentStore(photos, app.config['GOOGLE_KEY'],
+                       app.config['CONTENT_PATHS'],
                        urlfetch.fetch, cache, app.config['TIMEOUT'])
 
 
 # ROUTES
-
-@app.route('/flickr')
-def flickr_test():
-    try:
-        res = photos.fetch_photo('40995662852')
-    except Exception as e:
-        return  "Flickr: " + repr(e)
-    return json.dumps(res, indent=2).replace('\n', '<br>').replace(' ', '&nbsp;')
-
 @app.route('/')
 def debug_root():
     try:
         return render_template('index.html',
                                home=content['home'],
                                events=content['events'])
+    except Exception as e:
+        return str(e)
+
+@app.route('/events')
+def debug_events():
+    try:
+        return render_template('events.html',
+                               general=content['general'],
+                               events=content['events'],
+                               event_page=content['event_page'])
     except Exception as e:
         return str(e)
 

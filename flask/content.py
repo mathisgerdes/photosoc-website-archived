@@ -54,7 +54,9 @@ class ContentStore(SpreadsheetsInterface):
         SpreadsheetsInterface.__init__(
             self, google_key, urlfetch, cache, timeout, {
                 'events': (paths['events'], self.update_events),
-                'home': (paths['home'], self.update_home)})
+                'event_page': (paths['events'], self.update_event_page),
+                'home': (paths['home'], self.update_home),
+                'general': (paths['general'], self.update_general)})
 
     def parse_image(self, key, flickr_ending):
         if key.startswith('id:'):
@@ -108,3 +110,28 @@ class ContentStore(SpreadsheetsInterface):
         home['features'] = features
 
         return home
+
+    def update_general(self, path):
+        general = dict()
+        response = self.fetch_section(path + 'Main', 'B2:C5')
+
+        general['email'] = response[0][0]
+        general['fb_link'] = response[3][0]
+        general['fb_embed'] = response[3][1]
+
+        return general
+
+    def update_event_page(self, path):
+        event_page = dict()
+
+        response = self.fetch_section(path + 'Main', 'B2:D8')
+
+        event_page['title'] = response[0][0]
+        event_page['subtitle'] = opt_row_item(response[0], 1, None)
+        event_page['has_alert'] = response[3][0].lower() == 'true'
+        event_page['alert_title'] = opt_row_item(response[3], 1, 'empty')
+        event_page['alert_text'] = opt_row_item(response[3], 2, 'empty')
+        event_page['regular_title'] = response[6][0]
+        event_page['facebook_title'] = response[6][1]
+
+        return event_page

@@ -18,7 +18,7 @@
 
     <header>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
           <img src="https://cdn3.iconfinder.com/data/icons/glypho-photography/64/camera-shutter-512.png" width="30" height="30" class="d-inline-block align-top" alt="" style="filter:invert(1);">
           PhotoSoc Edinburgh
         </a>
@@ -27,13 +27,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="galleries.html">Galleries</a>
+            <li class="nav-item {% block galleries_active %}{% endblock %}">
+              <a class="nav-link" href="galleries">Galleries</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="events.html">Events</a>
+            <li class="nav-item {% block events_active %}{% endblock %}">
+              <a class="nav-link" href="events">Events</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item {% block members_active %}{% endblock %}">
               <a class="nav-link" href="#">Members</a>
             </li>
           </ul>
