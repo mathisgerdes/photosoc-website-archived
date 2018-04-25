@@ -42,6 +42,15 @@ def debug_events():
     except Exception as e:
         return str(e)
 
+@app.route('/committee')
+def debug_committee():
+    try:
+        return render_template('committee.html',
+                               general=content['general'])
+    except Exception as e:
+        return str(e)
+
+
 @app.route('/admin/content')
 def show_content():
     try:
