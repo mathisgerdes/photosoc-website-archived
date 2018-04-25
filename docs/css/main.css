@@ -44,6 +44,7 @@ footer {
   right: 0;
   height: 1rem;
   padding-right: 5px;
+  z-index: 100000;
 }
 
 .flickr-link a {
