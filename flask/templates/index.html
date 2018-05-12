@@ -13,16 +13,18 @@
   <div class="carousel-inner">
     {% for slide in home.slides %}
     <div class="carousel-item {% if loop.first %}active{% endif %}">
-      <div class="carousel-background" style="background-image:url({{ slide.image[0] }});"></div>
+      <div class="carousel-background" style="background-image:url({{ slide.image[0] }});">
+        <div class="w-100 h-100" style="background-color: rgba(32,26,22,.2);"></div>
+      </div>
       {% if slide.image[1] -%}
       <div class="flickr-link">
         <a href="{{ slide.image[1] }}">photo on flickr</a>
       </div>
       {%- endif %}
       <div class="container">
-        <div class="carousel-caption text-right">
-          <h1><span class="shaded-background">{{ slide.heading }}</span></h1>
-          <p><span class="shaded-background"> {{ slide.text }} </span></p>
+        <div class="carousel-caption text-center">
+          <h1>{{ slide.heading }}</h1>
+          <p> {{ slide.text }} </p>
           {% if slide.button -%}
           <p><a class="btn btn-lg btn-primary" href="{{ slide.button_link }}" role="button">{{ slide.button }}</a></p>
           {%- endif %}
