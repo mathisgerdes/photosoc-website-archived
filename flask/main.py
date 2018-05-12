@@ -4,6 +4,9 @@ from flask import Flask, render_template, request
 from content import ContentStore
 from flickr import FlickrInterface
 
+# DEBUG
+from google.appengine.runtime import apiproxy_errors
+
 import json
 
 app = Flask(__name__)
@@ -46,7 +49,8 @@ def debug_events():
 def debug_committee():
     try:
         return render_template('committee.html',
-                               general=content['general'])
+                               committee=content['committee'],
+                               years=sorted(content['committee'].keys(), reverse=True))
     except Exception as e:
         return str(e)
 

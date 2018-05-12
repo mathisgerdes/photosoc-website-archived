@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block additional_css %}
+<link rel="stylesheet" href="http://photosoc-edinburgh.github.io/css/committee.css">
+{% endblock %}
 
 {% block committee_active %}active{% endblock %}
 
@@ -16,26 +19,31 @@
   </p>
 </div>
 
-{% for y in [2018, 2017] %}
+{% for year in years %}
 <hr>
 <div class="container-fluid pt-2">
   <div class="row">
 
-    <div class="col-lg-2">
-      <h1 class="display-2 text-center">{{ y }}</h1>
+    <div class="col-lg-3">
+      <h1 class="display-2 text-center">{{ year }}</h1>
     </div>
-    <div class="col-lg-10">
+    <div class="col-lg-9">
       <div class="container pt-2">
 
         <div class="row">
-          {% for i in [1, 2, 3, 4, 5] %}
+          {% for member in committee[year] %}
           <div class="col text-center mb-4">
             <div class="profile-picture-container">
-              <div class="rounded-circle profile-picture" alt="Areej" width="256px" height="256px" style="background-image: url('https://c1.staticflickr.com/1/884/39228994670_255367ef3b_n.jpg');"></div>
+              <a href="{{ member.photo[1] }}" title="view on Flickr">
+                <div class="rounded-circle profile-picture" alt="{{ member.name }}" width="256px" height="256px" style="background-image: url('{{ member.photo[0] }}');"></div>
+              </a>
             </div>
-            <h2 class="mb-1">Areej Yawar</h2>
-            <h5 class="mb-2"> Social Secretary </h5>
-            <p>I really enjoy photography! I mean... why did you think I am on this committee?! I have other interests as well. But I'm really passionate about photography.</p>
+            <h2 class="mb-1">{{ member.name }}</h2>
+            <h5 class="mb-2"> {{ member.role }} </h5>
+            <p>{{ member.text }}{% if member.text_more -%}
+              <span>... <a class="expand-button" href="#"> more </a> </span>
+              <span style="display:none;">{{ member.text_more }} </span>
+            {%- endif %}</p>
           </div>
           {% endfor %}
         </div>
@@ -49,27 +57,13 @@
 
 {% block script_include %}
 {{ super() }}
-<style media="screen">
-.profile-picture-container {
-  text-align: center;
-  padding: 1rem;
-  vertical-align: middle;
-}
-.profile-picture {
-  height: 2.5in;
-  width: 2.5in;
-  align-content: fill;
-  background-size: cover;
-  background-position-x: 50%;
-  background-position-y: 20%;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.committee-year {
-  -moz-box-shadow: inset 0 0 10px #000000;
-  -webkit-box-shadow: inset 0 0 10px #000000;
-  box-shadow: inset 1.5px 5px 10px #ccc;
-}
-</style>
+<script type="text/javascript">
+$(function() {
+  $('.expand-button').click(function(e) {
+    e.target.parentElement.nextElementSibling.style.setProperty('display', 'inline');
+    e.target.parentElement.style.setProperty('display', 'none');
+    e.preventDefault();
+  });
+});
+</script>
 {% endblock %}

@@ -3,12 +3,11 @@ import json
 
 class CacheInterface(object):
     def __init__(self, base_url, urlfetch, cache, timeout,
-                 content=None, default_update=None):
+                 content=None):
         self.cache = cache
         self.urlfetch = urlfetch
         self.base_url = base_url
         self.content = content if content is not None else dict()
-        self.default_update = default_update
         self.timeout = timeout
 
     def fetch(self, path):
@@ -18,6 +17,10 @@ class CacheInterface(object):
         else:
             value = response.content
         return value
+
+    def default_update(self, key):
+        # by default expect key to be a url
+        return self.fetch(key)
 
     def update(self, key):
         """ Force update of the value saved in cache for key.
@@ -35,11 +38,7 @@ class CacheInterface(object):
             value = update_fn(path)
         except KeyError:
             # default update mechanism
-            if self.default_update is not None:
-                value = self.default_update(key)
-            else:
-                # otherwise key must be a url
-                value = self.fetch(key)
+            value = self.default_update(key)
 
         self.cache.set(key, value, timeout=self.timeout)
 

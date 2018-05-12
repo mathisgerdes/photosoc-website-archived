@@ -9,6 +9,9 @@ class FlickrInterface(CacheInterface):
         CacheInterface.__init__(
             self, 'https://api.flickr.com/services/rest/?', *args, **kwargs)
 
+    def default_update(self, key):
+        return self.fetch_photo(key)
+        
     def fetch_flickr(self, variables):
         response = self.fetch('format=json&nojsoncallback=1&api_key=' +
                               self.flickr_key + '&' + '&'.join(variables))

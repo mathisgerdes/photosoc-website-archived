@@ -56,12 +56,13 @@ class ContentStore(SpreadsheetsInterface):
                 'events': (paths['events'], self.update_events),
                 'event_page': (paths['events'], self.update_event_page),
                 'home': (paths['home'], self.update_home),
-                'general': (paths['general'], self.update_general)})
+                'general': (paths['general'], self.update_general),
+                'committee': (paths['committee'], self.update_committee)})
 
     def parse_image(self, key, flickr_ending):
         if key.startswith('id:'):
-            id = key.split(':')[1].strip()
-            photo = self.photos.fetch_photo(id)
+            photo_id = key.split(':')[1].strip()
+            photo = self.photos[photo_id]
             return (photo['src_base'] + flickr_ending, photo['url'])
         return (key, None)
 
@@ -135,3 +136,27 @@ class ContentStore(SpreadsheetsInterface):
         event_page['facebook_title'] = response[6][1]
 
         return event_page
+
+    def update_committee(self, path):
+        committees = dict()
+        year = None
+        for row in self.fetch_list(path + 'List', 'A', 'D', 2):
+            if row[0] == 'YEAR':
+                year = row[1]
+                committees[year] = []
+            elif year is not None:
+                text_full = row[2]
+                if len(text_full) < 200:
+                    text = text_full
+                    text_more = ''
+                else:
+                    breakpoint = text_full.find(' ', 160)
+                    text = text_full[:breakpoint]
+                    text_more = text_full[breakpoint:]
+                committees[year].append({
+                    'name': row[0],
+                    'role': row[1],
+                    'text': text,
+                    'text_more': text_more,
+                    'photo': self.parse_image(row[3], '_n.jpg')})
+        return committees

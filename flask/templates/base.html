@@ -5,6 +5,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Favicon CSS -->
+    <link rel="apple-touch-icon" sizes="180x180" href="http://static.uoe.photography/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://static.uoe.photography/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="http://static.uoe.photography/icons/favicon-16x16.png">
+    <link rel="manifest" href="http://static.uoe.photography/icons/site.webmanifest">
+    <link rel="mask-icon" href="http://static.uoe.photography/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="http://static.uoe.photography/icons/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="PhotoSoc">
+    <meta name="application-name" content="PhotoSoc">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="http://static.uoe.photography/icons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -12,26 +25,25 @@
     <link rel="stylesheet" href="http://photosoc-edinburgh.github.io/css/main.css">
     {% block additional_css %}{% endblock %}
 
-    <title>{% block title %}PhotoSoc Edinburgh{% endblock %}</title>
+    <title>{% block title %}Edinburgh PhotoSoc{% endblock %}</title>
   </head>
   <body>
 
     <header>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="/">
-          <img src="https://cdn3.iconfinder.com/data/icons/glypho-photography/64/camera-shutter-512.png" width="30" height="30" class="d-inline-block align-top" alt="" style="filter:invert(1);">
-          PhotoSoc Edinburgh
+          <img src="http://static.uoe.photography/img/logo_white.svg" height="40" class="d-inline-block align-top" alt="PhotoSoc Edinburgh">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item {% block galleries_active %}{% endblock %}">
-              <a class="nav-link" href="galleries">Galleries</a>
-            </li>
             <li class="nav-item {% block events_active %}{% endblock %}">
               <a class="nav-link" href="events">Events</a>
+            </li>
+            <li class="nav-item {% block equipment_active %}{% endblock %}">
+              <a class="nav-link" href="equipment">Equipment</a>
             </li>
             <li class="nav-item {% block committee_active %}{% endblock %}">
               <a class="nav-link" href="committee">Committee</a>
@@ -50,7 +62,9 @@
       <!-- FOOTER -->
       <footer class="container">
         <p class="float-right"><a href="#">Back to top</a></p>
-        <p>© Edinburgh University Photography Society · <a href="#">Contact</a> · <a href="#">About</a></p>
+        <p>© Edinburgh University Photography Society · <a href="#">Contact</a> · <a href="#">About</a><br>
+          <span class="text-muted">This product uses the Flickr API but is not endorsed or certified by Flickr.</span>
+        </p>
       </footer>
     </main>
 
