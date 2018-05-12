@@ -7,5 +7,10 @@ libraries:
   version: "0.12"
 
 handlers:
+- url: /static
+  static_dir: ./
 - url: /.*
   script: main.app
+
+error_handlers:
+  - file: redirect_static.html
