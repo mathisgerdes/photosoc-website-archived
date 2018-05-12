@@ -1,0 +1,21 @@
+.profile-picture-container {
+  text-align: center;
+  padding: 1rem;
+  vertical-align: middle;
+}
+.profile-picture {
+  height: 2.5in;
+  width: 2.5in;
+  align-content: fill;
+  background-size: cover;
+  background-position-x: 50%;
+  background-position-y: 20%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.committee-year {
+  -moz-box-shadow: inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow: inset 1.5px 5px 10px #ccc;
+}
