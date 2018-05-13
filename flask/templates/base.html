@@ -49,6 +49,7 @@
               <a class="nav-link" href="committee">Committee</a>
             </li>
           </ul>
+          <img style="height:100%;max-height:70px;" src="http://static.uoe.photography/img/uoe_small.png" alt="">
         </div>
       </nav>
       {% block header %}
@@ -95,18 +96,24 @@
         </div>
       </div>
       <!-- /Modal  -->
-
-      <!-- FOOTER -->
-      <footer class="container">
-        <p class="float-right"><a href="#">Back to top</a></p>
-        <p>© Edinburgh University Photography Society · <a href="#" data-toggle="modal" data-target="#modal-contact-form">Contact</a> · <a href="#">About</a><br>
-          <span class="text-muted">This product uses the Flickr API but is not endorsed or certified by Flickr.</span>
-        </p>
-      </footer>
     </main>
 
-    <div class="alert alert-success alert-dismissible fade show" role="alert" style="display:none;position:fixed; bottom:0px; right:0; margin:10px;z-index: 10000;
-" id="message-thankyou">
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-container container">
+        <p>© Edinburgh University Photography Society - <a href="#" data-toggle="modal" data-target="#modal-contact-form">Contact</a> - <a href="#">About</a><p>
+        <p>
+          <span class="text-muted">This product uses the Flickr API but is not endorsed or certified by Flickr.</span>
+        </p>
+
+        <div class="container-fluid footer-logos">
+          <img class="m-3" src="http://static.uoe.photography/img/logo_white.svg" alt="PhotoSoc Edinburgh">
+          <img class="m-3" src="http://static.uoe.photography/img/uoe_stacked.png" alt="University of Edinburgh">
+        </div>
+      </div>
+    </footer>
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert" style="display:none;position:fixed; bottom:0px; right:0; margin:10px;z-index: 10000;" id="message-thankyou">
       Thank you for the message!
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">×</span>
