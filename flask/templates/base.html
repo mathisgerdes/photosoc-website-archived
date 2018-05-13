@@ -59,17 +59,68 @@
       {% block main %}
       {% endblock %}
 
+      <!-- CONTACT FORM -->
+      <!-- Modal -->
+      <div class="modal fade" id="modal-contact-form" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title"> Contact </h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="short-feedback">
+                   <!-- hidden iframe to push the script response to -->
+                   <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+                   <form id="short-feedback" class="center-wrapper" target="hidden_iframe" onsubmit="onFeedbackSubmit();" action="https://script.google.com/macros/s/AKfycbxGMWi9-Cf5RYFv85X-nu5Ikgb5xb5-6UYBEv8v34XR2-fNZhTv/exec" method="post">
+                       <div class="form-group">
+                          <label for="name">Name or Email</label>
+                          <input class="form-control" name="name" type="text" id="name" placeholder="Who are you?">
+                       </div>
+                       <div class="form-group">
+                          <label for="message">Message</label>
+                          <textarea class="form-control" name="message" id="message" rows="5"></textarea>
+                       </div>
+                       <button type="submit" class="btn btn-primary">Submit</button>
+                   </form>
+
+                   <div class="feedback-thanks center-wrapper" style="display:none;">
+                       Thank you for taking the time! Your feedback was sent.
+                   </div>
+               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Modal  -->
+
       <!-- FOOTER -->
       <footer class="container">
         <p class="float-right"><a href="#">Back to top</a></p>
-        <p>© Edinburgh University Photography Society · <a href="#">Contact</a> · <a href="#">About</a><br>
+        <p>© Edinburgh University Photography Society · <a href="#" data-toggle="modal" data-target="#modal-contact-form">Contact</a> · <a href="#">About</a><br>
           <span class="text-muted">This product uses the Flickr API but is not endorsed or certified by Flickr.</span>
         </p>
       </footer>
     </main>
 
+    <div class="alert alert-success alert-dismissible fade show" role="alert" style="display:none;position:fixed; bottom:0px; right:0; margin:10px;z-index: 10000;
+" id="message-thankyou">
+      Thank you for the message!
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+
     {% block script_include %}
     <!-- Optional JavaScript -->
+    <script type="text/javascript">
+      function onFeedbackSubmit () {
+        $("#modal-contact-form").modal('hide');
+        $("#message-thankyou").show();
+      }
+    </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
