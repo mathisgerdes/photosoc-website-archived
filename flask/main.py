@@ -48,3 +48,8 @@ def committee():
                            page=content['committee_page'],
                            committee=content['committee'],
                            years=sorted(content['committee'].keys(), reverse=True))
+
+@app.route('/about')
+def about():
+    return render_template('about.html',
+                           general=content['general'])

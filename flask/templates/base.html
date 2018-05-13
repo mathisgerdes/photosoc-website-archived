@@ -32,7 +32,7 @@
     <header>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #333f48;">
         <a class="navbar-brand" href="/">
-          <img src="http://static.uoe.photography/img/logo_white.svg" height="40" class="d-inline-block align-top" alt="PhotoSoc Edinburgh">
+          <img src="http://static.uoe.photography/img/logo_white.svg" height="40px" class="d-inline-block align-top" alt="PhotoSoc Edinburgh">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -49,7 +49,7 @@
               <a class="nav-link" href="committee">Committee</a>
             </li>
           </ul>
-          <img style="height:100%;max-height:70px;" src="http://static.uoe.photography/img/uoe_small.png" alt="">
+          <img style="height:50px;" src="http://static.uoe.photography/img/uoe_small.png" alt="">
         </div>
       </nav>
       {% block header %}
@@ -73,24 +73,20 @@
             </div>
             <div class="modal-body">
               <div class="short-feedback">
-                   <!-- hidden iframe to push the script response to -->
-                   <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
-                   <form id="short-feedback" class="center-wrapper" target="hidden_iframe" onsubmit="onFeedbackSubmit();" action="https://script.google.com/macros/s/AKfycbxGMWi9-Cf5RYFv85X-nu5Ikgb5xb5-6UYBEv8v34XR2-fNZhTv/exec" method="post">
-                       <div class="form-group">
-                          <label for="name">Name or Email</label>
-                          <input class="form-control" name="name" type="text" id="name" placeholder="Who are you?">
-                       </div>
-                       <div class="form-group">
-                          <label for="message">Message</label>
-                          <textarea class="form-control" name="message" id="message" rows="5"></textarea>
-                       </div>
-                       <button type="submit" class="btn btn-primary">Submit</button>
-                   </form>
-
-                   <div class="feedback-thanks center-wrapper" style="display:none;">
-                       Thank you for taking the time! Your feedback was sent.
+                <!-- hidden iframe to push the script response to -->
+                <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+                <form id="short-feedback" class="center-wrapper" target="hidden_iframe" onsubmit="onFeedbackSubmit();" action="https://script.google.com/macros/s/AKfycbxGMWi9-Cf5RYFv85X-nu5Ikgb5xb5-6UYBEv8v34XR2-fNZhTv/exec" method="post">
+                   <div class="form-group">
+                      <label for="name">Name or Email</label>
+                      <input class="form-control" name="name" type="text" id="name" placeholder="Who are you?">
                    </div>
-               </div>
+                   <div class="form-group">
+                      <label for="message">Message</label>
+                      <textarea class="form-control" name="message" id="message" rows="5"></textarea>
+                   </div>
+                   <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -101,7 +97,7 @@
     <!-- FOOTER -->
     <footer>
       <div class="footer-container container">
-        <p>© Edinburgh University Photography Society - <a href="#" data-toggle="modal" data-target="#modal-contact-form">Contact</a> - <a href="#">About</a><p>
+        <p>© University of Edinburgh Photography Society - <a href="#" data-toggle="modal" data-target="#modal-contact-form">Contact</a> - <a href="#">About</a><p>
         <p>
           <span class="text-muted">This product uses the Flickr API but is not endorsed or certified by Flickr.</span>
         </p>

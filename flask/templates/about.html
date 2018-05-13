@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block additional_css %}
+<link rel="stylesheet" href="http://photosoc-edinburgh.github.io/css/committee.css">
+{% endblock %}
+
+{% block committee_active %}active{% endblock %}
+
+{% block main %}
+
+<div class="container my-5">
+
+  <div class="row">
+    <div class="col-md-4 order-md-2">
+      <h2>Contact</h2>
+      <p>
+        <b>University of Edinburgh Photography Society</b> (responsible for content) <br>
+        <a href="{{ general.email|safe }}">{{ general.email|safe }}</a>
+      </p>
+      <p><b>Technical Support</b> <br> Mathis Gerdes </p>
+    </div>
+    <div class="col-md-8 order-md-1">
+      <h1 class="display-4">About</h1>
+      <p> This is the website of the University of Edinburgh Photography Society (<i>PhotoSoc</i>). </p>
+      <p style="text-align: justify;">
+        The information contained in this website is for general information purposes only. The information is provided by University of Edinburgh Photography Society and while we endeavour to keep the information up to date and correct, we make no representations or warranties of any kind, express or implied, about the accuracy, reliability, suitability or availability with respect to the website or the information, products, services, or related graphics contained on the website for any purpose. Any reliance you place on such information is therefore strictly at your own risk.
+
+        In no event will we be liable for any loss or damage including without limitation, indirect or consequential loss or damage, or any loss or damage whatsoever arising from loss of data or profits arising out of, or in connection with, the use of this website.
+      </p>
+      <h1>Leave a Message</h1>
+      <p>
+        Feel free to leave us a note with feedback or suggestions! Note that messages submitted
+        this way might not be checked on a very regular basis, so for urgent matters please send us an email!
+      </p> <hr>
+      <div class="short-feedback">
+           <!-- hidden iframe to push the script response to -->
+           <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+           <form id="short-feedback" class="center-wrapper" target="hidden_iframe" onsubmit="onAboutFeedbackSubmit();" action="https://script.google.com/macros/s/AKfycbxGMWi9-Cf5RYFv85X-nu5Ikgb5xb5-6UYBEv8v34XR2-fNZhTv/exec" method="post">
+               <div class="form-group">
+                  <label for="name">Name or Email</label>
+                  <input class="form-control" name="name" type="text" id="name">
+               </div>
+               <div class="form-group">
+                  <label for="message">Message</label>
+                  <textarea class="form-control" name="message" id="message" rows="5"></textarea>
+               </div>
+               <div class="alert alert-success" style="display:none;" id="feedback-thanks">
+                  Thank you for taking the time! Your feedback was sent.
+              </div>
+               <button type="submit" class="btn btn-primary">Submit</button>
+           </form>
+       </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block script_include %}
+{{ super() }}
+<!-- Optional JavaScript -->
+<script type="text/javascript">
+  function onAboutFeedbackSubmit () {
+    $("#feedback-thanks").show();
+  }
+</script>
+{% endblock %}
