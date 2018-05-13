@@ -14,6 +14,43 @@ body {
   border: 0;
 }
 
+body {
+  height: 100%;
+}
+
+footer {
+  overflow:hidden;
+  color: #e5e5e5;
+  background-color: #333f48;
+}
+
+footer a {
+  color: inherit;
+}
+
+footer a:hover {
+  color: #aaa;
+}
+
+.footer-container {
+  padding: 64px 32px;
+  text-align: center;
+}
+
+.footer-logos img {
+  width: 30%;
+}
+
+@media (max-width: 640px) {
+  .footer-container {
+    padding: 20px;
+  }
+
+  .footer-logos img {
+    width: 78%;
+  }
+}
+
 /* fix aspect ratio of an image */
 
 .ratio-box-4by3 {
