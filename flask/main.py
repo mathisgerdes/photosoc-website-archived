@@ -4,9 +4,6 @@ from flask import Flask, render_template, request
 from content import ContentStore
 from flickr import FlickrInterface
 
-# DEBUG
-from google.appengine.runtime import apiproxy_errors
-
 import json
 
 app = Flask(__name__)
@@ -18,7 +15,7 @@ SHEETS_URL = 'https://sheets.googleapis.com/v4/'
 
 cache = GAEMemcachedCache()
 
-photos = FlickrInterface(app.config['FLICKR_KEY'],# app.config['CONTENT_PATHS'],
+photos = FlickrInterface(app.config['FLICKR_KEY'],
                          urlfetch.fetch, cache, app.config['TIMEOUT'])
 content = ContentStore(photos, app.config['GOOGLE_KEY'],
                        app.config['CONTENT_PATHS'],
@@ -27,45 +24,27 @@ content = ContentStore(photos, app.config['GOOGLE_KEY'],
 
 # ROUTES
 @app.route('/')
-def debug_root():
-    try:
-        return render_template('index.html',
-                               home=content['home'],
-                               events=content['events'])
-    except Exception as e:
-        return str(e)
+def root():
+    return render_template('index.html',
+                           page=content['home_page'],
+                           events=content['events'])
 
 @app.route('/events')
-def debug_events():
-    try:
-        return render_template('events.html',
-                               general=content['general'],
-                               events=content['events'],
-                               event_page=content['event_page'])
-    except Exception as e:
-        return str(e)
+def events():
+    return render_template('events.html',
+                           general=content['general'],
+                           events=content['events'],
+                           page=content['event_page'])
+
+@app.route('/equipment')
+def equipment():
+    return render_template('equipment.html',
+                           equipment=content['equipment'],
+                           page=content['equipment_page'])
 
 @app.route('/committee')
-def debug_committee():
-    try:
-        return render_template('committee.html',
-                               committee=content['committee'],
-                               years=sorted(content['committee'].keys(), reverse=True))
-    except Exception as e:
-        return str(e)
-
-
-@app.route('/admin/content')
-def show_content():
-    try:
-        return '<!doctype html><html><body>' + str(content) + '</body></html>'
-    except Exception as e:
-        return str(e)
-
-@app.route('/admin/update')
-def update_data():
-    try:
-        content.update_all()
-    except Exception as e:
-        return str(e)
-    return show_content()
+def committee():
+    return render_template('committee.html',
+                           page=content['committee_page'],
+                           committee=content['committee'],
+                           years=sorted(content['committee'].keys(), reverse=True))

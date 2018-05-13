@@ -11,7 +11,7 @@
     <li data-target="#myCarousel" data-slide-to="2"></li>
   </ol>
   <div class="carousel-inner">
-    {% for slide in home.slides %}
+    {% for slide in page.slides %}
     <div class="carousel-item {% if loop.first %}active{% endif %}">
       <div class="carousel-background" style="background-image:url({{ slide.image[0] }});">
         <div class="w-100 h-100" style="background-color: rgba(32,26,22,.2);"></div>
@@ -48,7 +48,7 @@
 <div class="container-fluid">
   <h1 class="display-4 text-center">Upcoming</h1>
   <div class="row">
-    {% for eventid in home.featured_events %}
+    {% for eventid in page.featured_events %}
     <div class="col-lg">
       <div class="card event">
         <div class="ratio-box-16by9">
@@ -65,7 +65,40 @@
           <h5 class="card-title">{{ events[eventid].title }}</h5>
           <p class="event-date">{{ events[eventid].date }}</p>
           <p class="card-text">{{ events[eventid].summary }}</p>
-          <a href="{{ events[eventid].fb_link }}" class="btn btn-primary">Facebook</a>
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary float-right ml-2" data-toggle="modal" data-target="#modal{{eventid}}">
+            View »
+          </button>
+          {% if events[eventid].button %}
+          <a href="{{ events[eventid].button_link }}" class="btn btn-secondary float-right ml-2">{{ events[eventid].button }}</a>
+          {% endif %}
+
+          <!-- Modal -->
+          <div class="modal fade" id="modal{{eventid}}" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <div>
+                    <h3 class="modal-title" id="modalLongTitle">{{ events[eventid].title }}</h3>
+                    <p class="event-date mb-0">{{ events[eventid].date }}</p>
+                  </div>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <div class="modal-body">
+                  {{ events[eventid].full_text|safe }}
+                </div>
+                <div class="modal-footer">
+                  {% if events[eventid].button %}
+                  <a href="{{ events[eventid].button_link }}" class="btn btn-primary">{{ events[eventid].button }}</a>
+                  {% endif %}
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div><!-- \Modal  -->
         </div>
       </div>
     </div>
@@ -80,7 +113,7 @@
 <div class="container highlights">
 
   <!-- START THE FEATURETTES -->
-  {% for feature in home.features %}
+  {% for feature in page.features %}
   <hr class="featurette-divider">
 
   <div class="row featurette">

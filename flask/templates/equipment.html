@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block additional_css %}
+<link rel="stylesheet" href="http://photosoc-edinburgh.github.io/css/committee.css">
+{% endblock %}
+
+{% block equipment_active %}active{% endblock %}
+
+{% block main %}
+
+<div class="jumbotron">
+  <h1 class="jumbotron-heading display-4">
+    {{ page.title }}
+  </h1>
+  {{ page.lead|safe }}
+  {{ page.text|safe }}
+</div>
+
+<div class="container pt-2">
+
+    {% for object in equipment %}
+    <div class="card mb-5 mt-5 w-100">
+      <div class="row" style="height: fit-content;">
+        <div class="col-lg-5" style="min-height: 20rem;">
+          {% if object.image[1] -%}
+          <div class="flickr-link" style="bottom:-1rem;right:15px;">
+            <a href="{{ object.image[1] }}">photo on flickr</a>
+          </div>
+          {%- endif %}
+          <img class="h-100 w-100" style="object-fit:cover;" src="{{ object.image[0] }}" alt="Equipment Photo">
+        </div>
+        <div class="col-lg-7">
+          <div class="card-body" style="display:table;height:100%;widdth:100%;">
+            <div class="align-middle" style="display:table-cell;">
+
+              <h2 class="card-title">{{ object.name }}</h2>
+              <p class="card-text">
+                {{ object.text|safe }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock %}
+
+{% block script_include %}
+{{ super() }}
+<style media="screen">
+
+</style>
+{% endblock %}

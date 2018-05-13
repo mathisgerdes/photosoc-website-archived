@@ -1,5 +1,9 @@
 import json
+import markdown
+import re
 from cache import CacheInterface
+
+REGEX_TO_ID = re.compile('[\W_]+', re.UNICODE)
 
 
 def parse_time(date_from, date_to, time_from, time_to):
@@ -55,9 +59,12 @@ class ContentStore(SpreadsheetsInterface):
             self, google_key, urlfetch, cache, timeout, {
                 'events': (paths['events'], self.update_events),
                 'event_page': (paths['events'], self.update_event_page),
-                'home': (paths['home'], self.update_home),
+                'home_page': (paths['home'], self.update_home_page),
                 'general': (paths['general'], self.update_general),
-                'committee': (paths['committee'], self.update_committee)})
+                'committee': (paths['committee'], self.update_committee),
+                'committee_page': (paths['committee'], self.update_committee_page),
+                'equipment': (paths['equipment'], self.update_equipment),
+                'equipment_page': (paths['equipment'], self.update_equipment_page)})
 
     def parse_image(self, key, flickr_ending):
         if key.startswith('id:'):
@@ -69,18 +76,21 @@ class ContentStore(SpreadsheetsInterface):
     def update_events(self, path):
         events = []
 
-        for row in self.fetch_list(path + 'EventList', 'A', 'I', 2):
+        for row in self.fetch_list(path + 'EventList', 'A', 'J', 2):
+            event_id = REGEX_TO_ID.sub('-', row[1] + '_' + row[0])
             events.append({
                 'title': row[0],
                 'text': row[5],
                 'date': parse_time(row[1], row[2], row[3], row[4]),
                 'image': self.parse_image(row[6], '_b.jpg'),
-                'link': row[7],
-                'full_text': row[8]})
+                'button': row[7],
+                'button_link': row[8],
+                'id': event_id,
+                'full_text': markdown.markdown(row[9])})
 
         return events
 
-    def update_home(self, path):
+    def update_home_page(self, path):
         home = dict()
 
         # general
@@ -160,3 +170,36 @@ class ContentStore(SpreadsheetsInterface):
                     'text_more': text_more,
                     'photo': self.parse_image(row[3], '_n.jpg')})
         return committees
+
+    def update_committee_page(self, path):
+        committee_page = dict()
+
+        response = self.fetch_section(path + 'Main', 'B2:D2')[0]
+
+        lead_paragraph = '<p class="lead" style="font-weight:inherit;">'
+        lead = markdown.markdown(response[2])
+        committee_page['title'] = response[0]
+        committee_page['sub_title'] = response[1]
+        committee_page['lead'] = lead.replace('<p>', lead_paragraph)
+        return committee_page
+
+    def update_equipment(self, path):
+        equipment = []
+        for row in self.fetch_list(path + 'List', 'A', 'C', 2):
+            equipment.append({
+                'name': row[0],
+                'text': markdown.markdown(row[1]),
+                'image': self.parse_image(row[2], '_b.jpg')})
+        return equipment
+
+    def update_equipment_page(self, path):
+        equipment_page = dict()
+
+        response = self.fetch_section(path + 'Main', 'B2:D2')[0]
+
+        lead_paragraph = '<p class="lead" style="font-weight:inherit;">'
+        lead = markdown.markdown(response[1])
+        equipment_page['title'] = response[0]
+        equipment_page['lead'] = lead.replace('<p>', lead_paragraph)
+        equipment_page['text'] = markdown.markdown(response[2])
+        return equipment_page

@@ -7,22 +7,20 @@
 
 {% block main %}
 
-<div class="jumbotron" style="background-color: white;">
+<div class="jumbotron" style="background-color: inherit;">
   <h1 class="jumbotron-heading display-3">
-    Members
+    {{ page.title }}
   </h1>
   <h2 class="jumbotron-heading text-muted">
-      Current and past committee members.
-  </h6>
-  <p class="lead">
-    If you are interested in joining, come and join us to one of our events!
-  </p>
+      {{ page.sub_title }}
+  </h2>
+  {{ page.lead|safe }}
 </div>
 
 {% for year in years %}
 <hr>
 <div class="container-fluid pt-2">
-  <div class="row">
+  <div class="row px-4">
 
     <div class="col-lg-3">
       <h1 class="display-2 text-center">{{ year }}</h1>

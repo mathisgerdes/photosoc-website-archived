@@ -5,19 +5,19 @@
 {% block main %}
 <div class="jumbotron jumbotron-fluid text-center">
   <div class="container">
-    <h1 class="jumbotron-heading">{{ event_page.title }}</h1>
-    {% if event_page.subtitle %}
-    <p>{{ event_page.subtitle }}</p>
+    <h1 class="jumbotron-heading">{{ page.title }}</h1>
+    {% if page.subtitle %}
+    <p>{{ page.subtitle }}</p>
     {% endif %}
   </div>
 </div>
 
 <div class="container">
 
-  {% if event_page.has_alert %}
+  {% if page.has_alert %}
   <div class="alert alert-warning" role="alert">
-    <h4 class="alert-heading">{{ event_page.alert_title }}</h4>
-    <p>{{ event_page.alert_text }}</p>
+    <h4 class="alert-heading">{{ page.alert_title }}</h4>
+    <p>{{ page.alert_text }}</p>
   </div>
   {% endif %}
 
@@ -29,7 +29,7 @@
         <div class="card-body">
           <table class="table mb-2 text-left">
             <tr>
-              <th class="text-center" colspan="2">{{ event_page.regular_title }}</th>
+              <th class="text-center" colspan="2">{{ page.regular_title }}</th>
             </tr>
             <tr>
               <td>Weekly Talks & Workshops</td>
@@ -47,7 +47,7 @@
       <div class="card mb-3">
         <div class="card-body pl-0 pr-0">
           <div class="card-title">
-            <h2>{{ event_page.facebook_title }}</h2>
+            <h2>{{ page.facebook_title }}</h2>
           </div>
           <iframe class="rounded fb-event-embed" src='{{ general.fb_embed }}' width='340' height='410' style='border:none;overflow:hidden' scrolling='no' frameborder='0' allowTransparency='true'></iframe>
         </div>
@@ -72,9 +72,38 @@
               <h5 class="card-title">{{ event.title }}</h5>
               <p class="event-date">{{ event.date }}</p>
               <p class="card-text">{{ event.text }}</p>
-              {% if event.button %}
-              <a href="{{ event.button_link }}" class="btn btn-primary">{{ event.button }}</a>
-              {% endif %}
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal{{event.id}}">
+                View »
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="modal{{event.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <div>
+                        <h3 class="modal-title" id="exampleModalLongTitle">{{ event.title }}</h3>
+                        <p class="event-date mb-0">{{ event.date }}</p>
+                      </div>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+
+                    <div class="modal-body">
+                      {{ event.full_text|safe }}
+                    </div>
+                    <div class="modal-footer">
+                      {% if event.button %}
+                      <a href="{{ event.button_link }}" class="btn btn-primary">{{ event.button }}</a>
+                      {% endif %}
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- \Modal  -->
+
             </div>
           </div>
         </div>
