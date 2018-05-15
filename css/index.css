@@ -17,7 +17,7 @@
 }
 
 .carousel-background {
-  height: calc(100.1vh - 3.5rem);
+  height: calc(100.1vh - 66px);
   min-height: 300px;
   background: no-repeat center center scroll;
   -webkit-background-size: cover;

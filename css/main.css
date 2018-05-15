@@ -37,6 +37,11 @@ footer a:hover {
   text-align: center;
 }
 
+.contact-footer {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
 .footer-logos img {
   width: 30%;
 }
