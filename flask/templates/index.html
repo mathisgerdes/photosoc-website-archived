@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block additional_css %}
-<link rel="stylesheet" href="http://static.uoe.photography/css/index.css">
+<link rel="stylesheet" href="https://static.uoe.photography/css/index.css">
 {% endblock %}
 
 {% block header %}
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
+    {% for slide in page.slides %}
+    <li data-target="#myCarousel" data-slide-to="{{ loop.index0 }}" {% if loop.first %}class="active"{% endif %}></li>
+    {% endfor %}
   </ol>
   <div class="carousel-inner">
     {% for slide in page.slides %}

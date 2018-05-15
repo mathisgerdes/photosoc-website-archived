@@ -124,11 +124,12 @@ class ContentStore(SpreadsheetsInterface):
 
     def update_general(self, path):
         general = dict()
-        response = self.fetch_section(path + 'Main', 'B2:C5')
+        response = self.fetch_section(path + 'Main', 'B2:D5')
 
         general['email'] = response[0][0]
         general['fb_link'] = response[3][0]
         general['fb_embed'] = response[3][1]
+        general['cover_image'] = self.parse_image(response[3][2], '_b.jpg')
 
         return general
 

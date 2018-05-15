@@ -26,8 +26,9 @@ content = ContentStore(photos, app.config['GOOGLE_KEY'],
 @app.route('/')
 def root():
     return render_template('index.html',
+                           general=content['general'],
                            page=content['home_page'],
-                           events=content['events'])
+                           events=content['events'],)
 
 @app.route('/events')
 def events():
@@ -39,12 +40,14 @@ def events():
 @app.route('/equipment')
 def equipment():
     return render_template('equipment.html',
+                           general=content['general'],
                            equipment=content['equipment'],
                            page=content['equipment_page'])
 
 @app.route('/committee')
 def committee():
     return render_template('committee.html',
+                           general=content['general'],
                            page=content['committee_page'],
                            committee=content['committee'],
                            years=sorted(content['committee'].keys(), reverse=True))
@@ -53,3 +56,11 @@ def committee():
 def about():
     return render_template('about.html',
                            general=content['general'])
+
+@app.route('/admin/force_update')
+def force_update():
+    try:
+        content.update_all()
+    except Exception as e:
+        return str(e)
+    return show_content()
