@@ -21,6 +21,10 @@ def opt_row_item(row, index, default):
     except IndexError:
         return default
 
+def parse_md_lead(text):
+    lead_paragraph = '<p class="lead" style="font-weight:inherit;">'
+    lead = markdown.markdown(text)
+    return lead.replace('<p>', lead_paragraph)
 
 class SpreadsheetsInterface(CacheInterface):
     def __init__(self, google_key, *args, **kwargs):
@@ -115,7 +119,7 @@ class ContentStore(SpreadsheetsInterface):
                 'image': self.parse_image(row[0], '_b.jpg'),
                 'heading': row[1],
                 'heading_muted': row[2],
-                'text': row[3],
+                'text': parse_md_lead(row[3]),
                 'button': opt_row_item(row, 4, None),
                 'button_link': opt_row_item(row, 5, '#')})
         home['features'] = features
@@ -177,11 +181,9 @@ class ContentStore(SpreadsheetsInterface):
 
         response = self.fetch_section(path + 'Main', 'B2:D2')[0]
 
-        lead_paragraph = '<p class="lead" style="font-weight:inherit;">'
-        lead = markdown.markdown(response[2])
         committee_page['title'] = response[0]
         committee_page['sub_title'] = response[1]
-        committee_page['lead'] = lead.replace('<p>', lead_paragraph)
+        committee_page['lead'] = parse_md_lead(response[2])
         return committee_page
 
     def update_equipment(self, path):
@@ -198,9 +200,8 @@ class ContentStore(SpreadsheetsInterface):
 
         response = self.fetch_section(path + 'Main', 'B2:D2')[0]
 
-        lead_paragraph = '<p class="lead" style="font-weight:inherit;">'
-        lead = markdown.markdown(response[1])
+
         equipment_page['title'] = response[0]
-        equipment_page['lead'] = lead.replace('<p>', lead_paragraph)
+        equipment_page['lead'] = parse_md_lead(response[1])
         equipment_page['text'] = markdown.markdown(response[2])
         return equipment_page

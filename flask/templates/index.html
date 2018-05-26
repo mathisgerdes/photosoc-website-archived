@@ -119,9 +119,7 @@
   <div class="row featurette">
     <div class="featurette-text col-md-7 {% if loop.index is divisibleby 2 %}order-md-2{% endif %}">
       <h2 class="featurette-heading">{{ feature.heading }} {% if feature.heading_muted -%}<span class="text-muted">{{ feature.heading_muted }}</span>{%- endif %}</h2>
-      <p class="lead">
-        {{ feature.text }}
-      </p>
+      {{ feature.text|safe }}
       {% if feature.button %}
       <a class="btn btn-primary" href="{{ feature.button_link }}">{{ feature.button }}</a>
       {% endif %}

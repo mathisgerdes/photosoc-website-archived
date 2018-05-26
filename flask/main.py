@@ -63,4 +63,4 @@ def force_update():
         content.update_all()
     except Exception as e:
         return str(e)
-    return show_content()
+    return "Done."
